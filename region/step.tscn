@@ -1,0 +1,276 @@
+[gd_scene load_steps=32 format=3 uid="uid://ckytkg3l240s6"]
+
+[ext_resource type="Script" path="res://region/step.gd" id="1_o3nae"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_otvne"]
+size = Vector3(0.68, 0.09, 1.14)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_14ck3"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.176471)
+
+[sub_resource type="SphereMesh" id="SphereMesh_oar8e"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bvy5v"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hu1f0"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jlrp2"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_haltt"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jacsm"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_viw1y"]
+resource_local_to_scene = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_y0vls"]
+size = Vector3(0.295, 0.09, 0.725)
+
+[sub_resource type="SphereMesh" id="SphereMesh_h81lg"]
+radius = 0.075
+height = 0.15
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bipq"]
+resource_local_to_scene = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_2e1q2"]
+resource_local_to_scene = true
+size = Vector3(0.03, 0.03, 0.03)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oh7a7"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ptmu"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uo8i2"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xgfa0"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jxf3a"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ixvor"]
+resource_local_to_scene = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_go06l"]
+radius = 0.075
+height = 0.15
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h6a07"]
+resource_local_to_scene = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_024p2"]
+radius = 0.075
+height = 0.15
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wn7mh"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_22l6y"]
+resource_local_to_scene = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_g7rjd"]
+resource_local_to_scene = true
+size = Vector3(0.03, 0.03, 0.03)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7bwsg"]
+resource_local_to_scene = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_2m68q"]
+size = Vector3(0.68, 0.09, 0.705)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6osir"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ofuv"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_328k4"]
+resource_local_to_scene = true
+
+[node name="Step" type="Node3D"]
+script = ExtResource("1_o3nae")
+
+[node name="PrecombatPhase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00848979, 0.0249598, 1.44321)
+mesh = SubResource("BoxMesh_otvne")
+surface_material_override/0 = SubResource("StandardMaterial3D_14ck3")
+
+[node name="UntapMarker" type="MeshInstance3D" parent="PrecombatPhase"]
+transform = Transform3D(0.13522, 0, 0, 0, 0.13522, 0, 0, 0, 0.13522, 0, 0.0579324, 0.435925)
+mesh = SubResource("SphereMesh_oar8e")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_bvy5v")
+
+[node name="DrawMarker" type="MeshInstance3D" parent="PrecombatPhase"]
+transform = Transform3D(0.13522, 0, 0, 0, 0.13522, 0, 0, 0, 0.13522, 0, 0.0579324, 0.206465)
+mesh = SubResource("SphereMesh_oar8e")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_hu1f0")
+
+[node name="DraftMarker" type="MeshInstance3D" parent="PrecombatPhase"]
+transform = Transform3D(0.13522, 0, 0, 0, 0.13522, 0, 0, 0, 0.13522, 0, 0.0579324, -0.0302044)
+mesh = SubResource("SphereMesh_oar8e")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_jlrp2")
+
+[node name="PassPackMarker" type="MeshInstance3D" parent="PrecombatPhase"]
+transform = Transform3D(0.060318, 0, 0, 0, 0.060318, 0, 0, 0, 0.060318, 0, 0.0579324, -0.204466)
+mesh = SubResource("SphereMesh_oar8e")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_haltt")
+
+[node name="ITManaMarker" type="MeshInstance3D" parent="PrecombatPhase"]
+transform = Transform3D(0.13522, 0, 0, 0, 0.13522, 0, 0, 0, 0.13522, -0.227574, 0.0596206, -0.295952)
+mesh = SubResource("SphereMesh_oar8e")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_jacsm")
+
+[node name="NITManaMarker" type="MeshInstance3D" parent="PrecombatPhase"]
+transform = Transform3D(0.13522, 0, 0, 0, 0.13522, 0, 0, 0, 0.13522, 0.196491, 0.0596206, -0.427237)
+mesh = SubResource("SphereMesh_oar8e")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_viw1y")
+
+[node name="CombatPhase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.198387, 0.0249598, 0.397293)
+mesh = SubResource("BoxMesh_y0vls")
+surface_material_override/0 = SubResource("StandardMaterial3D_14ck3")
+
+[node name="Attack" type="MeshInstance3D" parent="CombatPhase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0065167, 0.0582079, 0.242855)
+mesh = SubResource("SphereMesh_h81lg")
+surface_material_override/0 = SubResource("StandardMaterial3D_1bipq")
+
+[node name="AfterAttackPriorityWindow" type="Node3D" parent="CombatPhase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00433874, 0.145087, 0.126233)
+
+[node name="Rotate" type="Node3D" parent="CombatPhase/AfterAttackPriorityWindow"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Cube" type="MeshInstance3D" parent="CombatPhase/AfterAttackPriorityWindow/Rotate"]
+transform = Transform3D(0.707107, 0, -0.707107, -2.98023e-08, 1, -2.98023e-08, 0.707107, 2.98023e-08, 0.707107, 0, 0, 0)
+mesh = SubResource("BoxMesh_2e1q2")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_oh7a7")
+
+[node name="Block" type="MeshInstance3D" parent="CombatPhase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0065167, 0.0582079, 0.0273618)
+mesh = SubResource("SphereMesh_h81lg")
+surface_material_override/0 = SubResource("StandardMaterial3D_3ptmu")
+
+[node name="AfterBlockPriorityWindow" type="Node3D" parent="CombatPhase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00433874, 0.145087, -0.0794913)
+
+[node name="Rotate" type="Node3D" parent="CombatPhase/AfterBlockPriorityWindow"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Cube" type="MeshInstance3D" parent="CombatPhase/AfterBlockPriorityWindow/Rotate"]
+transform = Transform3D(0.707107, 0, -0.707107, -2.98023e-08, 1, -2.98023e-08, 0.707107, 2.98023e-08, 0.707107, 0, 0, 0)
+mesh = SubResource("BoxMesh_2e1q2")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_uo8i2")
+
+[node name="Damage" type="MeshInstance3D" parent="CombatPhase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0065167, 0.0582079, -0.189643)
+mesh = SubResource("SphereMesh_h81lg")
+surface_material_override/0 = SubResource("StandardMaterial3D_xgfa0")
+
+[node name="AfterCombatPriorityWindow" type="Node3D" parent="CombatPhase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00433874, 0.145087, -0.305457)
+
+[node name="Rotate" type="Node3D" parent="CombatPhase/AfterCombatPriorityWindow"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Cube" type="MeshInstance3D" parent="CombatPhase/AfterCombatPriorityWindow/Rotate"]
+transform = Transform3D(0.707107, 0, -0.707107, -2.98023e-08, 1, -2.98023e-08, 0.707107, 2.98023e-08, 0.707107, 0, 0, 0)
+mesh = SubResource("BoxMesh_2e1q2")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_jxf3a")
+
+[node name="CombatPhase2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.203548, 0.0249598, -0.388951)
+mesh = SubResource("BoxMesh_y0vls")
+surface_material_override/0 = SubResource("StandardMaterial3D_14ck3")
+
+[node name="Attack" type="MeshInstance3D" parent="CombatPhase2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0065167, 0.0582079, 0.242855)
+mesh = SubResource("SphereMesh_h81lg")
+surface_material_override/0 = SubResource("StandardMaterial3D_ixvor")
+
+[node name="Block" type="MeshInstance3D" parent="CombatPhase2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0065167, 0.0582079, 0.0273618)
+mesh = SubResource("SphereMesh_go06l")
+surface_material_override/0 = SubResource("StandardMaterial3D_h6a07")
+
+[node name="Damage" type="MeshInstance3D" parent="CombatPhase2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0065167, 0.0582079, -0.189643)
+mesh = SubResource("SphereMesh_024p2")
+surface_material_override/0 = SubResource("StandardMaterial3D_wn7mh")
+
+[node name="AfterAttackPriorityWindow" type="Node3D" parent="CombatPhase2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00433874, 0.145087, 0.126233)
+
+[node name="Rotate" type="Node3D" parent="CombatPhase2/AfterAttackPriorityWindow"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Cube" type="MeshInstance3D" parent="CombatPhase2/AfterAttackPriorityWindow/Rotate"]
+transform = Transform3D(0.707107, 0, -0.707107, -2.98023e-08, 1, -2.98023e-08, 0.707107, 2.98023e-08, 0.707107, 0, 0, 0)
+mesh = SubResource("BoxMesh_2e1q2")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_22l6y")
+
+[node name="AfterBlockPriorityWindow" type="Node3D" parent="CombatPhase2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00433874, 0.145087, -0.0794913)
+
+[node name="Rotate" type="Node3D" parent="CombatPhase2/AfterBlockPriorityWindow"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Cube" type="MeshInstance3D" parent="CombatPhase2/AfterBlockPriorityWindow/Rotate"]
+transform = Transform3D(0.707107, 0, -0.707107, -2.98023e-08, 1, -2.98023e-08, 0.707107, 2.98023e-08, 0.707107, 0, 0, 0)
+mesh = SubResource("BoxMesh_g7rjd")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_h6a07")
+
+[node name="AfterCombatPriorityWindow" type="Node3D" parent="CombatPhase2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00433874, 0.145087, -0.305457)
+
+[node name="Rotate" type="Node3D" parent="CombatPhase2/AfterCombatPriorityWindow"]
+transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Cube" type="MeshInstance3D" parent="CombatPhase2/AfterCombatPriorityWindow/Rotate"]
+transform = Transform3D(0.707107, 0, -0.707107, -2.98023e-08, 1, -2.98023e-08, 0.707107, 2.98023e-08, 0.707107, 0, 0, 0)
+mesh = SubResource("BoxMesh_2e1q2")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_7bwsg")
+
+[node name="MainPhase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000330061, 0.0249598, -1.27408)
+mesh = SubResource("BoxMesh_2m68q")
+surface_material_override/0 = SubResource("StandardMaterial3D_14ck3")
+
+[node name="Regroup" type="MeshInstance3D" parent="MainPhase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000507772, 0.0582079, 0.215919)
+mesh = SubResource("SphereMesh_h81lg")
+surface_material_override/0 = SubResource("StandardMaterial3D_6osir")
+
+[node name="ITMain" type="MeshInstance3D" parent="MainPhase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.209396, 0.0582079, 0.0185744)
+mesh = SubResource("SphereMesh_h81lg")
+surface_material_override/0 = SubResource("StandardMaterial3D_4ofuv")
+
+[node name="NITMain" type="MeshInstance3D" parent="MainPhase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.194623, 0.0678809, -0.197445)
+mesh = SubResource("SphereMesh_h81lg")
+skeleton = NodePath("../ITMain")
+surface_material_override/0 = SubResource("StandardMaterial3D_328k4")

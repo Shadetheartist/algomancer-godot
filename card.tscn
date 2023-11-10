@@ -1,0 +1,204 @@
+[gd_scene load_steps=23 format=3 uid="uid://dllcq3png48qe"]
+
+[ext_resource type="Texture2D" uid="uid://cacfvbckryoo1" path="res://scuffed_card_texture.png" id="1_0ktjc"]
+[ext_resource type="Script" path="res://card.gd" id="1_cqbm1"]
+[ext_resource type="Texture2D" uid="uid://c26gpyke8fclh" path="res://textures/earth_noise.tres" id="3_oksbb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_svd1f"]
+albedo_color = Color(0.137255, 0.137255, 0.137255, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pbucf"]
+material = SubResource("StandardMaterial3D_svd1f")
+size = Vector3(1, 0.01, 1.35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c4ohf"]
+resource_local_to_scene = true
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow_amount = 0.01
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xj0jh"]
+size = Vector3(1, 0.0214868, 1.35098)
+
+[sub_resource type="SphereMesh" id="SphereMesh_tuqbq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5kqbx"]
+albedo_color = Color(1, 0, 0.0156863, 1)
+roughness = 0.38
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gjcym"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_vn3ld"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24p1w"]
+albedo_color = Color(0.329412, 0.121569, 0.12549, 1)
+roughness_texture = ExtResource("3_oksbb")
+normal_enabled = true
+normal_texture = ExtResource("3_oksbb")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h0t5a"]
+frequency = 0.004
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7jtxu"]
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_h0t5a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v8ehi"]
+resource_local_to_scene = true
+albedo_color = Color(0, 0, 1, 1)
+roughness = 0.08
+normal_enabled = true
+normal_scale = 2.68
+normal_texture = SubResource("NoiseTexture2D_7jtxu")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tpu1d"]
+noise_type = 2
+frequency = 0.1954
+fractal_octaves = 2
+fractal_lacunarity = 1.0
+fractal_gain = 1.0
+cellular_jitter = -0.025
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ftbc2"]
+noise = SubResource("FastNoiseLite_tpu1d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r16dt"]
+albedo_color = Color(0.580392, 0.580392, 0.580392, 1)
+metallic = 1.0
+metallic_specular = 0.53
+roughness = 0.16
+normal_scale = -0.68
+normal_texture = SubResource("NoiseTexture2D_ftbc2")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_83r8a"]
+frequency = 0.0136
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jtxq8"]
+seamless = true
+as_normal_map = true
+noise = SubResource("FastNoiseLite_83r8a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nktw2"]
+albedo_color = Color(0.0431373, 0.529412, 0, 1)
+metallic = 0.49
+normal_enabled = true
+normal_scale = 1.21
+normal_texture = SubResource("NoiseTexture2D_jtxq8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3quf"]
+
+[node name="Card" type="Node3D"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+script = ExtResource("1_cqbm1")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.35, 0, 0, 0, -1.5299e-08, 0.35, 0, -0.35, -1.5299e-08, 0, 0.0117682, 0)
+modulate = Color(0.478431, 0.478431, 0.478431, 1)
+texture = ExtResource("1_0ktjc")
+
+[node name="Front" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
+mesh = SubResource("BoxMesh_pbucf")
+surface_material_override/0 = SubResource("StandardMaterial3D_c4ohf")
+
+[node name="Back" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.975, 0, 0, 0, 0.975, 0, 0, 0, 0.975, 0, -0.000941242, 0)
+mesh = SubResource("BoxMesh_pbucf")
+
+[node name="Label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0129341, -0.565713)
+double_sided = false
+render_priority = 2
+outline_render_priority = 1
+text = "text"
+outline_size = 0
+
+[node name="Type" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0129341, -0.359791)
+double_sided = false
+render_priority = 2
+outline_render_priority = 1
+text = "text"
+outline_size = 0
+
+[node name="Timing" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0129341, -0.166129)
+double_sided = false
+render_priority = 2
+outline_render_priority = 1
+text = "text"
+outline_size = 0
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_xj0jh")
+
+[node name="Conversion" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.0648028, -0.808855)
+
+[node name="Fire" type="MeshInstance3D" parent="Conversion"]
+transform = Transform3D(0.132804, 0, 0, 0, 0.132804, 0, 0, 0, 0.132804, -0.00647023, 0.359478, 0.0007165)
+mesh = SubResource("SphereMesh_tuqbq")
+surface_material_override/0 = SubResource("StandardMaterial3D_5kqbx")
+
+[node name="Area3D" type="Area3D" parent="Conversion/Fire"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Conversion/Fire/Area3D"]
+shape = SubResource("SphereShape3D_gjcym")
+
+[node name="Earth" type="MeshInstance3D" parent="Conversion"]
+transform = Transform3D(0.132804, 0, 0, 0, 0.132804, 0, 0, 0, 0.132804, 0.184764, 0.192917, 0.000716493)
+mesh = SubResource("SphereMesh_vn3ld")
+surface_material_override/0 = SubResource("StandardMaterial3D_24p1w")
+
+[node name="Area3D" type="Area3D" parent="Conversion/Earth"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Conversion/Earth/Area3D"]
+shape = SubResource("SphereShape3D_gjcym")
+
+[node name="Water" type="MeshInstance3D" parent="Conversion"]
+transform = Transform3D(0.132804, 0, 0, 0, 0.132804, 0, 0, 0, 0.132804, 0.0940409, -0.034717, 0.000716485)
+mesh = SubResource("SphereMesh_vn3ld")
+surface_material_override/0 = SubResource("StandardMaterial3D_v8ehi")
+
+[node name="Area3D" type="Area3D" parent="Conversion/Water"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Conversion/Water/Area3D"]
+shape = SubResource("SphereShape3D_gjcym")
+
+[node name="Metal" type="MeshInstance3D" parent="Conversion"]
+transform = Transform3D(0.132804, 0, 0, 0, 0.132804, 0, 0, 0, 0.132804, -0.103881, -0.0347173, 0.000716485)
+mesh = SubResource("SphereMesh_vn3ld")
+surface_material_override/0 = SubResource("StandardMaterial3D_r16dt")
+
+[node name="Area3D" type="Area3D" parent="Conversion/Metal"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Conversion/Metal/Area3D"]
+shape = SubResource("SphereShape3D_gjcym")
+
+[node name="Wood" type="MeshInstance3D" parent="Conversion"]
+transform = Transform3D(0.132804, 0, 0, 0, 0.132804, 0, 0, 0, 0.132804, -0.20521, 0.184589, 0.000716493)
+mesh = SubResource("SphereMesh_vn3ld")
+surface_material_override/0 = SubResource("StandardMaterial3D_nktw2")
+
+[node name="Area3D" type="Area3D" parent="Conversion/Wood"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Conversion/Wood/Area3D"]
+shape = SubResource("SphereShape3D_gjcym")
+
+[node name="Shard" type="MeshInstance3D" parent="Conversion"]
+transform = Transform3D(0.132804, 0, 0, 0, 0.132804, 0, 0, 0, 0.132804, -0.0026528, 0.1485, 0.000716493)
+mesh = SubResource("SphereMesh_vn3ld")
+surface_material_override/0 = SubResource("StandardMaterial3D_w3quf")
+
+[node name="Area3D" type="Area3D" parent="Conversion/Shard"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Conversion/Shard/Area3D"]
+shape = SubResource("SphereShape3D_gjcym")
+
+[connection signal="mouse_entered" from="Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="Area3D" to="." method="_on_area_3d_mouse_exited"]

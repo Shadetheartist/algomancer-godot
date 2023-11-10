@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://doqhewgifh1mm"]
+
+[ext_resource type="Script" path="res://deck.gd" id="1_r5a2i"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cjt4w"]
+
+[node name="Deck" type="Node3D"]
+transform = Transform3D(0.725, 0, 0, 0, 0.725, 0, 0, 0, 0.725, 0, 0, 0)
+script = ExtResource("1_r5a2i")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.53, 0, 0, 0, 0.01, 0, 0, 0, 0.728, 0, 0.00773641, 0)
+mesh = SubResource("BoxMesh_cjt4w")
+
+[node name="NumCardsLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0881729, -0.000987012)
+billboard = 1
+text = "XX"

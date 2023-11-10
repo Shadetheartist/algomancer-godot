@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://lgveou48l6xm"]
+
+[ext_resource type="Script" path="res://region/region.gd" id="1_l4s38"]
+[ext_resource type="PackedScene" uid="uid://cv5fl4u3g5qt0" path="res://region/player/player.tscn" id="1_mmxyw"]
+[ext_resource type="PackedScene" uid="uid://ckytkg3l240s6" path="res://region/step.tscn" id="3_0f84u"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_j20jc"]
+
+[node name="Region" type="Node3D"]
+script = ExtResource("1_l4s38")
+
+[node name="Player" parent="." instance=ExtResource("1_mmxyw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.34755)
+
+[node name="Bounds" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00324106, -0.00311875, 1.00752)
+mesh = SubResource("PlaneMesh_j20jc")
+
+[node name="Resources" type="Node3D" parent="Bounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.945353, 0, 0.512091)
+
+[node name="Units" type="Node3D" parent="Bounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.945353, 0, -0.703764)
+
+[node name="Step" parent="." instance=ExtResource("3_0f84u")]
+transform = Transform3D(-1.93905e-08, 0, -0.443604, 0, 0.443604, 0, 0.443604, 0, -1.93905e-08, 8.07609e-09, 0, -0.18476)

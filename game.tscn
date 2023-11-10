@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://c54blc7s0rc5l"]
+
+[ext_resource type="Script" path="res://state.gd" id="1_t4imc"]
+[ext_resource type="Script" path="res://addons/control_camera3d/nodes/control_camera_3d.gd" id="2_kd52i"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ukjt"]
+albedo_color = Color(0.176471, 0.176471, 0.176471, 1)
+roughness = 0.51
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ohygj"]
+material = SubResource("StandardMaterial3D_1ukjt")
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_t4imc")
+
+[node name="Tabletop" type="MeshInstance3D" parent="."]
+transform = Transform3D(6, 0, 0, 0, 0.089, 0, 0, 0, 6, 0, -0.28297, 0)
+mesh = SubResource("CylinderMesh_ohygj")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.924255, 0.381775, 0, -0.381775, 0.924255, 0, 4.53183, 10.9713)
+script = ExtResource("2_kd52i")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.879067, -0.0115137, -0.476559, 0.476699, 0.0212321, 0.87881, 0, -0.999708, 0.024153, -15.3362, 20.0087, 0)
+
+[node name="CommonDeckParent" type="Node3D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ActionsList" type="ItemList" parent="CanvasLayer"]
+offset_top = 28.0
+offset_right = 610.0
+offset_bottom = 216.0
+mouse_force_pass_scroll_events = false
+
+[node name="HistoryList" type="ItemList" parent="CanvasLayer"]
+offset_left = 1.0
+offset_top = 252.0
+offset_right = 271.0
+offset_bottom = 440.0
+mouse_force_pass_scroll_events = false
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 1.0
+offset_top = 229.0
+offset_right = 57.0
+offset_bottom = 255.0
+text = "History - click to seek"
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 322.0
+offset_bottom = 27.0
+text = "Available Actions - click to apply"
+
+[node name="Regions" type="Node3D" parent="."]
+
+[connection signal="item_clicked" from="CanvasLayer/ActionsList" to="." method="_on_item_list_item_clicked"]
+[connection signal="item_clicked" from="CanvasLayer/HistoryList" to="." method="_on_history_list_item_clicked"]
