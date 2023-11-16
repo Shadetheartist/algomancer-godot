@@ -2,6 +2,7 @@ extends Node3D
 
 var current_step: int
 var history = []
+var algomancer_cli_path = '/home/derek/RustroverProjects/algomancer/target/release/algomancer'
 
 func _on_item_list_item_clicked(index, at_position, mouse_button_index):
 	if $CanvasLayer/ActionsList.is_anything_selected() == false: 
@@ -13,7 +14,7 @@ func _on_item_list_item_clicked(index, at_position, mouse_button_index):
 
 func new_game():
 	var output = []
-	OS.execute('/home/derek/RustroverProjects/algomancer/target/release/algomancer', ['new_game'], output )
+	OS.execute(algomancer_cli_path, ['new', 'live_draft', '-f', 'wood', '-f', 'fire', '1v1'], output )
 	
 	var data = JSON.parse_string(output[0])
 	history_add(data, null)
@@ -23,14 +24,14 @@ func new_game():
 func get_actions(game_data):
 	var input = JSON.stringify(game_data).replace('"', '\\"')
 	var output = []
-	OS.execute('/home/derek/RustroverProjects/algomancer/target/release/algomancer', ['get_actions', input], output)
+	OS.execute(algomancer_cli_path, ['action', 'ls', input], output)
 	return JSON.parse_string(output[0])
 
 func apply_action(action):
 	var input_state = JSON.stringify(game_data).replace('"', '\\"')
 	var input_action = JSON.stringify(action).replace('"', '\\"')
 	var output = []
-	OS.execute('/home/derek/RustroverProjects/algomancer/target/release/algomancer', ['apply_action', input_state, input_action], output)
+	OS.execute(algomancer_cli_path, ['action', 'apply', input_state, input_action], output)
 	
 	var data = JSON.parse_string(output[0])
 	history_add(data, action)

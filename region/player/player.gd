@@ -7,7 +7,7 @@ func init(game_data, valid_actions, player_data):
 	$Body/Head.get_active_material(0).albedo_color = team_colors[player_data.team_id - 1]
 	$Hand.init(game_data, valid_actions, player_data.hand)
 	# $Discard.init(game_data, valid_actions, player_data.discard)
-	$PlayerNameLabel.text = "Player #" + str(player_data.player_id)
+	$PlayerNameLabel.text = "Player #" + str(player_data.id)
 	$InfoPanel/InfoLabel.text = "HP: " + str(player_data.health) + "\n" + "Team: " + str(player_data.team_id)
 
 # Called when the node enters the scene tree for the first time.
