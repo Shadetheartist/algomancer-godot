@@ -35,63 +35,47 @@ func on(marker):
 
 func init(game_data, valid_actions, step_data):
 	off_all()
-	if step_data.has("PrecombatPhase"):
+	if step_data.phase == "PrecombatPhase":
 		$PrecombatPhase.get_active_material(0).albedo_color = Color(Color.YELLOW, 0.5)
-		if step_data.PrecombatPhase == "Untap":
+		if step_data.step == "Untap":
 			on($PrecombatPhase/UntapMarker)
-		elif step_data.PrecombatPhase == "Draw":
+		elif step_data.step == "Draw":
 			on($PrecombatPhase/DrawMarker)
-		elif step_data.PrecombatPhase == "Draft":
+		elif step_data.step == "Draft":
 			on($PrecombatPhase/DraftMarker)
-		elif step_data.PrecombatPhase == "PassPack":
+		elif step_data.step == "PassPack":
 			on($PrecombatPhase/PassPackMarker)
-		elif step_data.PrecombatPhase == "ITMana":
-			on($PrecombatPhase/ITManaMarker)
-		elif step_data.PrecombatPhase == "NITMana":
-			on($PrecombatPhase/NITManaMarker)
+		elif step_data.step == "Mana":
+			if step_data.team == "IT":
+				on($PrecombatPhase/ITManaMarker)
+			else: 
+				on($PrecombatPhase/NITManaMarker)
 			
-	elif step_data.has("CombatPhaseA"):
-		$CombatPhase.get_active_material(0).albedo_color = Color(Color.YELLOW, 0.5)
-		if step_data.CombatPhaseA == "ITPrepareFormation":
-			on($CombatPhase/Attack)
-		elif step_data.CombatPhaseA == "ITAttack":
-			on($CombatPhase/Attack)
-		elif step_data.CombatPhaseA == "AfterITAttackPriorityWindow":
-			on($CombatPhase/AfterAttackPriorityWindow/Rotate/Cube)
-		elif step_data.CombatPhaseA == "NITBlock":
-			on($CombatPhase/Block)
-		elif step_data.CombatPhaseA == "AfterNITBlockPriorityWindow":
-			on($CombatPhase/AfterBlockPriorityWindow/Rotate/Cube)
-		elif step_data.CombatPhaseA == "Damage":
-			on($CombatPhase/Damage)
-		elif step_data.CombatPhaseA == "AfterCombatPriorityWindow":
-			on($CombatPhase/AfterCombatPriorityWindow/Rotate/Cube)
-			
-	elif step_data.has("CombatPhaseB"):
-		$CombatPhase2.get_active_material(0).albedo_color = Color(Color.YELLOW, 0.5)
-		if step_data.CombatPhaseB == "NITPrepareFormation":
-			on($CombatPhase2/Attack)
-		elif step_data.CombatPhaseB == "NITAttack":
-			on($CombatPhase2/Attack)
-		elif step_data.CombatPhaseB == "AfterNITAttackPriorityWindow":
-			on($CombatPhase2/AfterAttackPriorityWindow/Rotate/Cube)
-		elif step_data.CombatPhaseB == "ITBlock":
-			on($CombatPhase2/Block)
-		elif step_data.CombatPhaseB == "AfterITBlockPriorityWindow":
-			on($CombatPhase2/AfterBlockPriorityWindow/Rotate/Cube)
-		elif step_data.CombatPhaseB == "Damage":
-			on($CombatPhase2/Damage)
-		elif step_data.CombatPhaseB == "AfterCombatPriorityWindow":
-			on($CombatPhase2/AfterCombatPriorityWindow/Rotate/Cube)
-	
-	elif step_data.has("MainPhase"):
+	elif step_data.phase == "CombatPhaseA" || step_data.phase == "CombatPhaseB":
+		var entity = $CombatPhase if step_data.phase == "CombatPhaseA" else $CombatPhase2
+		entity.get_active_material(0).albedo_color = Color(Color.YELLOW, 0.5)
+		if step_data.step == "Attack":
+			on(entity.find_child("Attack"))
+		elif step_data.step == "AfterAttackPriorityWindow":
+			on(entity.find_child("AfterAttackPriorityWindow/Rotate/Cube"))
+		elif step_data.step == "Block":
+			on(entity.find_child("Block"))
+		elif step_data.step == "AfterBlockPriorityWindow":
+			on(entity.find_child("AfterBlockPriorityWindow/Rotate/Cube"))
+		elif step_data.step == "Damage":
+			on(entity.find_child("Damage"))
+		elif step_data.step == "AfterCombatPriorityWindow":
+			on(entity.find_child("AfterCombatPriorityWindow/Rotate/Cube"))
+
+	elif step_data.phase == "MainPhase":
 		$MainPhase.get_active_material(0).albedo_color = Color(Color.YELLOW, 0.5)
-		if step_data.MainPhase == "Regroup":
+		if step_data.step == "Regroup":
 			on($MainPhase/Regroup)
-		elif step_data.MainPhase == "ITMain":
-			on($MainPhase/ITMain)
-		elif step_data.MainPhase == "NITMain":
-			on($MainPhase/NITMain)
+		elif step_data.step == "Main":
+			if step_data.team == "IT":
+				on($MainPhase/ITMain)
+			else: 
+				on($MainPhase/NITMain)
 			
 	print(step_data)
 	pass

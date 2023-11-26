@@ -30,7 +30,7 @@ transform = Transform3D(0.879067, -0.0115137, -0.476559, 0.476699, 0.0212321, 0.
 
 [node name="ActionsList" type="ItemList" parent="CanvasLayer"]
 offset_top = 28.0
-offset_right = 610.0
+offset_right = 835.0
 offset_bottom = 216.0
 mouse_force_pass_scroll_events = false
 
@@ -54,6 +54,22 @@ offset_top = 1.0
 offset_right = 322.0
 offset_bottom = 27.0
 text = "Available Actions - click to apply"
+
+[node name="MutationsList" type="ItemList" parent="CanvasLayer"]
+offset_left = 282.0
+offset_top = 253.0
+offset_right = 834.0
+offset_bottom = 441.0
+mouse_force_pass_scroll_events = false
+allow_search = false
+auto_height = true
+
+[node name="Label3" type="Label" parent="CanvasLayer"]
+offset_left = 282.0
+offset_top = 231.0
+offset_right = 446.0
+offset_bottom = 257.0
+text = "Mutations"
 
 [node name="Regions" type="Node3D" parent="."]
 

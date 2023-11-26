@@ -14,10 +14,10 @@ func _on_item_list_item_clicked(index, at_position, mouse_button_index):
 
 func new_game():
 	var output = []
-	OS.execute(algomancer_cli_path, ['new', 'live_draft', '-f', 'wood', '-f', 'fire', '1v1'], output )
+	OS.execute(algomancer_cli_path, ['new', 'live_draft', '-f', 'wood', '-f', 'fire', '1v1'], output)
 	
 	var data = JSON.parse_string(output[0])
-	history_add(data, null)
+	history_add(data, null, null)
 	
 	return data
 
@@ -25,27 +25,40 @@ func get_actions(game_data):
 	var input = JSON.stringify(game_data).replace('"', '\\"')
 	var output = []
 	OS.execute(algomancer_cli_path, ['action', 'ls', input], output)
-	return JSON.parse_string(output[0])
+	var result = JSON.parse_string(output[0])
+	
+	return result
 
 func apply_action(action):
 	var input_state = JSON.stringify(game_data).replace('"', '\\"')
 	var input_action = JSON.stringify(action).replace('"', '\\"')
 	var output = []
-	OS.execute(algomancer_cli_path, ['action', 'apply', input_state, input_action], output)
+	OS.execute(algomancer_cli_path, ['action', 'apply', '-m', input_state, input_action], output)
 	
 	var data = JSON.parse_string(output[0])
-	history_add(data, action)
+	var mutations = data.mutations
+	history_add(data.game, action, mutations)
 	
-	return data
+	return data.game
 
 
-func history_add(game_data, applied_action):
-	history.append({'state': game_data, 'action': applied_action})
+func history_add(game_data, applied_action, mutations):
+	history.append({'state': game_data, 'action': applied_action, 'mutations': mutations})
 	history_list_render()
 	
-
+func mutations_list_render():
+	var step = history[current_step]
+	if step.mutations != null:
+		step.mutations.reverse()
+		for mutation in step.mutations:
+			$CanvasLayer/MutationsList.add_item(mutation.type + ': ' + JSON.stringify(mutation))
+			pass
+		step.mutations.reverse()
+		
 func history_list_render():
 	$CanvasLayer/HistoryList.clear()
+	$CanvasLayer/MutationsList.clear()
+	
 	history.reverse()
 	
 	for step in history:
@@ -53,7 +66,7 @@ func history_list_render():
 			$CanvasLayer/HistoryList.add_item("Initial State")
 		else:
 			$CanvasLayer/HistoryList.add_item(JSON.stringify(step.action))
-	
+
 	history.reverse()
 
 var game_data = {}
@@ -79,15 +92,21 @@ func remove_all_children(node):
 
 func reset():
 	$CanvasLayer/ActionsList.clear()
+	$CanvasLayer/MutationsList.clear()
 	remove_all_children($CommonDeckParent)
 	remove_all_children($Regions)
 	
 
 func init():
-	for action in valid_actions:
-		$CanvasLayer/ActionsList.add_item(str(action))
+	if valid_actions:
+		for action in valid_actions:
+			$CanvasLayer/ActionsList.add_item(str(action))
 	
 	history_list_render()
+	mutations_list_render()
+	
+	if game_data == null:
+		return
 	
 	var i = 0
 	var side_len = 1.75 # size of player space 
