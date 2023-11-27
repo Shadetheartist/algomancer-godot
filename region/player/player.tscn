@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cv5fl4u3g5qt0"]
+[gd_scene load_steps=13 format=3 uid="uid://cv5fl4u3g5qt0"]
 
 [ext_resource type="Script" path="res://region/player/player.gd" id="1_x11yn"]
 [ext_resource type="PackedScene" uid="uid://b5sf47hidcrx3" path="res://region/player/hand.tscn" id="2_07mmo"]
 [ext_resource type="PackedScene" uid="uid://cgcjsya36h4mj" path="res://region/player/discard.tscn" id="3_opu1m"]
+[ext_resource type="PackedScene" uid="uid://b55nox8beoheo" path="res://region/player/pack.tscn" id="4_mihwp"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_gkj7y"]
 
@@ -52,6 +53,9 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 
 
 [node name="Discard" parent="." instance=ExtResource("3_opu1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11495, 0, -0.344619)
+
+[node name="Pack" parent="." instance=ExtResource("4_mihwp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.40211, 0, -1.17901)
 
 [node name="Pointer" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.399233, 0, 0, 0, -0.392946, 0, 0, 0, 0.123149, 0, 2.34065, 0.052591)

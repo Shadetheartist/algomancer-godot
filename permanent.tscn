@@ -1,3 +1,17 @@
-[gd_scene format=3 uid="uid://b5wmrgw6e6j15"]
+[gd_scene load_steps=5 format=3 uid="uid://b5wmrgw6e6j15"]
+
+[ext_resource type="Script" path="res://permanent.gd" id="1_tr6vs"]
+[ext_resource type="Texture2D" uid="uid://dfbw5whor30yx" path="res://assets/card_images/Shard-Resource.jpg" id="2_0v0aj"]
+[ext_resource type="Texture2D" uid="uid://dekjyir35khxr" path="res://assets/card_images/Metal-Resource.jpg" id="2_psoie"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03o64"]
+albedo_texture = ExtResource("2_0v0aj")
 
 [node name="Permanent" type="Node3D"]
+script = ExtResource("1_tr6vs")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.0995071, 0, 0, 0, -4.3496e-09, 0.0995071, 0, -0.0995071, -4.3496e-09, 0, 0.0455729, -1.99206e-09)
+material_override = SubResource("StandardMaterial3D_03o64")
+pixel_size = 0.0039
+texture = ExtResource("2_psoie")

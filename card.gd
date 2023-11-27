@@ -1,6 +1,7 @@
 extends Node3D
 
 var card_id: int
+var controller_player_id: int
 var card_name: String
 
 var hovered: bool
@@ -8,7 +9,7 @@ var default_border_color = Color.BLACK
 var card_valid_actions = []
 
 # Called when the node enters the scene tree for the first time.
-func init(game_data, valid_actions, card_data):
+func init(game_data, valid_actions, player_data, card_data):
 	default_border_color = Color.BLACK
 	card_valid_actions = []
 	
@@ -19,26 +20,42 @@ func init(game_data, valid_actions, card_data):
 	
 	self.card_name = card_proto.name
 	self.card_id = card_data.card_id
+	self.controller_player_id = player_data.id
 	
 	$Label.text = card_proto.name
 	
 	var card_type = card_proto.card_type.keys()[0]
-	var card_timing = card_proto.card_type[card_type]
+	var card_timing = "Default"
+	if card_type == "Unit" || card_type == "Spell": 
+		card_timing = card_proto.card_type[card_type].timing
+		
 	$Type.text = card_type
 	$Timing.text = card_timing
 	
 	for action in valid_actions:
-		if action.has("RecycleForResource"):
-			if action.RecycleForResource.card_id == card_data.card_id:
+		if action.type == "RecycleForResource":
+			if action.card_id == card_data.card_id:
 				card_has_action(action)
-				var resource_node = $Conversion.find_child(action.RecycleForResource.resource_type)
+				var resource_node = $Conversion.find_child(action.resource_type)
 				if resource_node != null:
 					resource_node.show()
 		
-		if action.has("PlayCard"):
-			if action.PlayCard.card_id == card_data.card_id:
+		if action.type == "PlayCard":
+			if action.card_id == card_data.card_id:
 				card_has_action(action)
-
+	
+	var image_name: String
+	if card_type == "Resource":
+		image_name = card_proto.name + "-Resource.jpg"
+	else:
+		image_name = card_proto.name + ".jpg"
+		
+	var path = "res://assets/card_images/" + image_name
+	var image = Image.load_from_file(path)
+	if image != null:
+		var image_texture = ImageTexture.create_from_image(image)
+		if image_texture != null:
+			$Sprite3D.texture = image_texture
 
 func card_has_action(action):
 	default_border_color = Color.GREEN_YELLOW
@@ -71,10 +88,10 @@ func handle_resource_conversion_input_event(camera: Node, event: InputEvent, pos
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
 			EventBus.action.emit({ 
-				"RecycleForResource": { 
-					"card_id": self.card_id, 
-					"resource_type": node.name 
-				}
+				"issuer_player_id": self.controller_player_id,
+				"type": "RecycleForResource",
+				"card_id": self.card_id, 
+				"resource_type": node.name 
 			})
 
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://dllcq3png48qe"]
 
-[ext_resource type="Texture2D" uid="uid://cacfvbckryoo1" path="res://scuffed_card_texture.png" id="1_0ktjc"]
 [ext_resource type="Script" path="res://card.gd" id="1_cqbm1"]
+[ext_resource type="Texture2D" uid="uid://dfbw5whor30yx" path="res://assets/card_images/Shard-Resource.jpg" id="2_epiws"]
 [ext_resource type="Texture2D" uid="uid://c26gpyke8fclh" path="res://textures/earth_noise.tres" id="3_oksbb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_svd1f"]
@@ -97,7 +97,8 @@ script = ExtResource("1_cqbm1")
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.35, 0, 0, 0, -1.5299e-08, 0.35, 0, -0.35, -1.5299e-08, 0, 0.0117682, 0)
 modulate = Color(0.478431, 0.478431, 0.478431, 1)
-texture = ExtResource("1_0ktjc")
+pixel_size = 0.0039
+texture = ExtResource("2_epiws")
 
 [node name="Front" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)

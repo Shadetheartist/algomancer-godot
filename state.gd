@@ -36,6 +36,13 @@ func apply_action(action):
 	OS.execute(algomancer_cli_path, ['action', 'apply', '-m', input_state, input_action], output)
 	
 	var data = JSON.parse_string(output[0])
+	
+	if data == null:
+		var err = []
+		OS.execute(algomancer_cli_path, ['action', 'apply', '-m', input_state, input_action], err, true)
+		push_error(err)
+		return null
+	
 	var mutations = data.mutations
 	history_add(data.game, action, mutations)
 	
@@ -77,6 +84,9 @@ func step(action):
 	
 	print('taking step with action', action)
 	game_data = apply_action(action)
+	if game_data == null: 
+		return
+		
 	valid_actions = get_actions(game_data)
 	current_step += 1
 	reset()

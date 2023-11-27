@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b55nox8beoheo"]
+
+[ext_resource type="Script" path="res://region/player/pack.gd" id="1_51dij"]
+[ext_resource type="PackedScene" uid="uid://qd5k46v56utj" path="res://blender/pack.blend" id="2_dcyob"]
+
+[node name="Pack" type="Node3D"]
+script = ExtResource("1_51dij")
+
+[node name="model" parent="." instance=ExtResource("2_dcyob")]
+transform = Transform3D(0.223204, 0, 0, 0, 0.223204, 0, 0, 0, 0.223204, 0, 0, 0)
