@@ -22,9 +22,7 @@ func init(game_data, valid_actions, region_data):
 			instance.init(game_data, valid_actions, permanent_data)
 			instance.translate(Vector3(unit_counter * 1.05, 0, 0))
 			$Bounds/Units.add_child(instance)
-			
-		
-		
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

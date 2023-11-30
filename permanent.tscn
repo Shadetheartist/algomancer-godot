@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://b5wmrgw6e6j15"]
 
 [ext_resource type="Script" path="res://permanent.gd" id="1_tr6vs"]
-[ext_resource type="Texture2D" uid="uid://dfbw5whor30yx" path="res://assets/card_images/Shard-Resource.jpg" id="2_0v0aj"]
-[ext_resource type="Texture2D" uid="uid://dekjyir35khxr" path="res://assets/card_images/Metal-Resource.jpg" id="2_psoie"]
+[ext_resource type="Texture2D" uid="uid://dfbw5whor30yx" path="res://assets/card_images/shard_resource.jpg" id="2_0v0aj"]
+[ext_resource type="Texture2D" uid="uid://dekjyir35khxr" path="res://assets/card_images/metal_resource.jpg" id="2_psoie"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03o64"]
 albedo_texture = ExtResource("2_0v0aj")

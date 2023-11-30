@@ -32,30 +32,21 @@ func init(game_data, valid_actions, player_data, card_data):
 	$Type.text = card_type
 	$Timing.text = card_timing
 	
-	for action in valid_actions:
-		if action.type == "RecycleForResource":
-			if action.card_id == card_data.card_id:
-				card_has_action(action)
-				var resource_node = $Conversion.find_child(action.resource_type)
-				if resource_node != null:
-					resource_node.show()
-		
-		if action.type == "PlayCard":
-			if action.card_id == card_data.card_id:
-				card_has_action(action)
+	if valid_actions:
+		for action in valid_actions:
+			if action.type == "RecycleForResource":
+				if action.card_id == card_data.card_id:
+					card_has_action(action)
+					var resource_node = $Conversion.find_child(action.resource_type)
+					if resource_node != null:
+						resource_node.show()
+			
+			if action.type == "PlayCard":
+				if action.card_id == card_data.card_id:
+					card_has_action(action)
 	
-	var image_name: String
-	if card_type == "Resource":
-		image_name = card_proto.name + "-Resource.jpg"
-	else:
-		image_name = card_proto.name + ".jpg"
-		
-	var path = "res://assets/card_images/" + image_name
-	var image = Image.load_from_file(path)
-	if image != null:
-		var image_texture = ImageTexture.create_from_image(image)
-		if image_texture != null:
-			$Sprite3D.texture = image_texture
+	var image_name = card_proto.std_name + ".jpg"
+	$Sprite3D.texture = load("res://assets/card_images/" + image_name)
 
 func card_has_action(action):
 	default_border_color = Color.GREEN_YELLOW

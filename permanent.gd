@@ -7,16 +7,8 @@ func init(game_data, valid_actions, permanent_data):
 	print(permanent_data)
 	print(prototype.name, ' | ', prototype.card_type)
 
-	var image_name: String
-	if permanent_data.type == "Resource":
-		image_name = prototype.name + "-Resource.jpg"
-	
-	var path = "res://assets/card_images/" + image_name
-	var image = Image.load_from_file(path)
-	if image != null:
-		var image_texture = ImageTexture.create_from_image(image)
-		if image_texture != null:
-			$Sprite3D.texture = image_texture
+	var image_name = prototype.std_name + ".jpg"
+	$Sprite3D.texture = load("res://assets/card_images/" + image_name)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
