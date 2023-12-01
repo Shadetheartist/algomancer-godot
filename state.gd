@@ -3,50 +3,51 @@ extends Node3D
 var current_step: int
 var history = []
 var algomancer_cli_path = '/home/derek/RustroverProjects/algomancer/target/release/algomancer'
+var state_path = '/tmp/state.json'
+var action_path = '/tmp/action.json'
+var actions_path = '/tmp/actions.json'
+var mutations_path = '/tmp/mutations.json'
 
-func _on_item_list_item_clicked(index, at_position, mouse_button_index):
-	if $CanvasLayer/ActionsList.is_anything_selected() == false: 
-		return
-	var item_idx = $CanvasLayer/ActionsList.get_selected_items()[0]
-	var item_text = $CanvasLayer/ActionsList.get_item_text(item_idx)
-	var action = JSON.parse_string(item_text)
-	step(action)
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	EventBus.action.connect(_handle_action)
+	game_data = new_game()
+	valid_actions = get_actions(game_data)
+	history_add(game_data, valid_actions, null)
+	init()
+
+
 
 func new_game():
 	var output = []
-	OS.execute(algomancer_cli_path, ['new', 'live_draft', '-f', 'wood', '-f', 'fire', '1v1'], output)
-	
-	var data = JSON.parse_string(output[0])
-	history_add(data, null, null)
-	
-	return data
+	OS.execute(algomancer_cli_path, ['new', '-o', state_path, 'live_draft', '-f', 'wood', '-f', 'fire', '1v1'], output)
+	return read_json_from_file(state_path)
 
 func get_actions(game_data):
-	var input = JSON.stringify(game_data).replace('"', '\\"')
-	var output = []
-	OS.execute(algomancer_cli_path, ['action', 'ls', input], output)
-	var result = JSON.parse_string(output[0])
+	var stderr = []
+	OS.execute(algomancer_cli_path, ['action', 'ls', '-f', state_path, '-o', actions_path], stderr, true)
+	var result = read_json_from_file(actions_path)
 	
 	return result
 
 func apply_action(action):
-	var input_state = JSON.stringify(game_data).replace('"', '\\"')
-	var input_action = JSON.stringify(action).replace('"', '\\"')
-	var output = []
-	OS.execute(algomancer_cli_path, ['action', 'apply', '-m', input_state, input_action], output)
+	write_to_file_as_json(action_path, action)
 	
-	var data = JSON.parse_string(output[0])
+	var stderr = []
+	var args = ['action', 'apply', '-f', state_path, '-o', state_path, '-a', action_path, '-m', mutations_path]
+	OS.execute(algomancer_cli_path, args, stderr, true)
+	
+	var data = read_json_from_file(state_path)
 	
 	if data == null:
-		var err = []
-		OS.execute(algomancer_cli_path, ['action', 'apply', '-m', input_state, input_action], err, true)
-		push_error(err)
+		push_error(stderr)
 		return null
 	
-	var mutations = data.mutations
-	history_add(data.game, action, mutations)
+	var mutations = read_json_from_file(mutations_path)
+	history_add(data, action, mutations)
 	
-	return data.game
+	return data
 
 
 func history_add(game_data, applied_action, mutations):
@@ -142,18 +143,26 @@ func init():
 		deck_instance.init(game_data, valid_actions, deck_data)
 		$CommonDeckParent.add_child(deck_instance)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	EventBus.action.connect(_handle_action)
-	game_data = new_game()
-	valid_actions = get_actions(game_data)
-	init()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-
+	
+func write_to_file_as_json(file, data):
+	var data_json = JSON.stringify(data)
+	var fileAccess = FileAccess.open(file, FileAccess.WRITE)
+	fileAccess.store_line(data_json)
+	fileAccess.close()
+	return data
+	
+func read_json_from_file(file):
+	var fileAccess = FileAccess.open(file, FileAccess.READ)
+	var json_data = fileAccess.get_as_text()
+	fileAccess.close()
+	var data = JSON.parse_string(json_data)
+	return data
+	
 func ngon_radius(l: float, n: int) -> float:
 	if n < 3:
 		return l / 2
@@ -177,9 +186,13 @@ func _on_history_list_item_clicked(index, at_position, mouse_button_index):
 	init()
 
 
-
-
-
+func _on_item_list_item_clicked(index, at_position, mouse_button_index):
+	if $CanvasLayer/ActionsList.is_anything_selected() == false: 
+		return
+	var item_idx = $CanvasLayer/ActionsList.get_selected_items()[0]
+	var item_text = $CanvasLayer/ActionsList.get_item_text(item_idx)
+	var action = JSON.parse_string(item_text)
+	step(action)
 
 
 
