@@ -7,8 +7,11 @@ func off_all():
 	off($PrecombatPhase/DraftMarker)
 	off($PrecombatPhase/PassPackMarker)
 	off($PrecombatPhase/ITManaMarker)
+	off($PrecombatPhase/ITHasteMarker)
 	off($PrecombatPhase/NITManaMarker)
+	off($PrecombatPhase/NITHasteMarker)
 	
+	off($CombatPhase)
 	off($CombatPhase/Attack)
 	off($CombatPhase/AfterAttackPriorityWindow/Rotate/Cube)
 	off($CombatPhase/Block)
@@ -16,6 +19,7 @@ func off_all():
 	off($CombatPhase/Damage)
 	off($CombatPhase/AfterCombatPriorityWindow/Rotate/Cube)
 	
+	off($CombatPhase2)
 	off($CombatPhase2/Attack)
 	off($CombatPhase2/AfterAttackPriorityWindow/Rotate/Cube)
 	off($CombatPhase2/Block)
@@ -23,6 +27,7 @@ func off_all():
 	off($CombatPhase2/Damage)
 	off($CombatPhase2/AfterCombatPriorityWindow/Rotate/Cube)
 	
+	off($MainPhase)
 	off($MainPhase/Regroup)
 	off($MainPhase/ITMain)
 	off($MainPhase/NITMain)
@@ -35,9 +40,9 @@ func on(marker):
 
 func init(game_data, valid_actions, step_data):
 	off_all()
-	if step_data.phase == "PrecombatPhase":
+	if step_data.phase == "PlanningPhase":
 		$PrecombatPhase.get_active_material(0).albedo_color = Color(Color.YELLOW, 0.5)
-		if step_data.step == "Untap":
+		if step_data.step == "Refresh":
 			on($PrecombatPhase/UntapMarker)
 		elif step_data.step == "Draw":
 			on($PrecombatPhase/DrawMarker)
@@ -50,9 +55,14 @@ func init(game_data, valid_actions, step_data):
 				on($PrecombatPhase/ITManaMarker)
 			else: 
 				on($PrecombatPhase/NITManaMarker)
+		elif step_data.step == "Haste":
+			if step_data.team == "IT":
+				on($PrecombatPhase/ITHasteMarker)
+			else: 
+				on($PrecombatPhase/NITHasteMarker)
 			
-	elif step_data.phase == "CombatPhaseA" || step_data.phase == "CombatPhaseB":
-		var entity = $CombatPhase if step_data.phase == "CombatPhaseA" else $CombatPhase2
+	elif step_data.phase == "BattlePhaseA" || step_data.phase == "BattlePhaseB":
+		var entity = $CombatPhase if step_data.phase == "BattlePhaseA" else $CombatPhase2
 		entity.get_active_material(0).albedo_color = Color(Color.YELLOW, 0.5)
 		if step_data.step == "Attack":
 			on(entity.find_child("Attack"))
@@ -67,11 +77,11 @@ func init(game_data, valid_actions, step_data):
 		elif step_data.step == "AfterCombatPriorityWindow":
 			on(entity.find_child("AfterCombatPriorityWindow/Rotate/Cube"))
 
-	elif step_data.phase == "MainPhase":
+	elif step_data.phase == "DeploymentPhase":
 		$MainPhase.get_active_material(0).albedo_color = Color(Color.YELLOW, 0.5)
 		if step_data.step == "Regroup":
 			on($MainPhase/Regroup)
-		elif step_data.step == "Main":
+		elif step_data.step == "Deployment":
 			if step_data.team == "IT":
 				on($MainPhase/ITMain)
 			else: 

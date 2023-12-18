@@ -1,9 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://ckytkg3l240s6"]
+[gd_scene load_steps=37 format=3 uid="uid://ckytkg3l240s6"]
 
 [ext_resource type="Script" path="res://region/step.gd" id="1_o3nae"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_otvne"]
-size = Vector3(0.68, 0.09, 1.14)
+size = Vector3(0.68, 0.09, 1.69)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_14ck3"]
 resource_local_to_scene = true
@@ -27,11 +27,22 @@ resource_local_to_scene = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jacsm"]
 resource_local_to_scene = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wub36"]
+resource_local_to_scene = true
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_viw1y"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yqyvr"]
 resource_local_to_scene = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_y0vls"]
 size = Vector3(0.295, 0.09, 0.725)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tf0ga"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.176471)
 
 [sub_resource type="SphereMesh" id="SphereMesh_h81lg"]
 radius = 0.075
@@ -58,6 +69,11 @@ resource_local_to_scene = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jxf3a"]
 resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bwdn0"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.176471)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ixvor"]
 resource_local_to_scene = true
@@ -89,6 +105,11 @@ resource_local_to_scene = true
 [sub_resource type="BoxMesh" id="BoxMesh_2m68q"]
 size = Vector3(0.68, 0.09, 0.705)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6cg3r"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.176471)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6osir"]
 resource_local_to_scene = true
 
@@ -102,50 +123,62 @@ resource_local_to_scene = true
 script = ExtResource("1_o3nae")
 
 [node name="PrecombatPhase" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00848979, 0.0249598, 1.44321)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00848979, 0.0249598, 1.71079)
 mesh = SubResource("BoxMesh_otvne")
 surface_material_override/0 = SubResource("StandardMaterial3D_14ck3")
 
 [node name="UntapMarker" type="MeshInstance3D" parent="PrecombatPhase"]
-transform = Transform3D(0.13522, 0, 0, 0, 0.13522, 0, 0, 0, 0.13522, 0, 0.0579324, 0.435925)
+transform = Transform3D(0.13522, 0, 0, 0, 0.13522, 0, 0, 0, 0.13522, 0, 0.0579324, 0.7135)
 mesh = SubResource("SphereMesh_oar8e")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_bvy5v")
 
 [node name="DrawMarker" type="MeshInstance3D" parent="PrecombatPhase"]
-transform = Transform3D(0.13522, 0, 0, 0, 0.13522, 0, 0, 0, 0.13522, 0, 0.0579324, 0.206465)
+transform = Transform3D(0.13522, 0, 0, 0, 0.13522, 0, 0, 0, 0.13522, 0, 0.0579324, 0.48404)
 mesh = SubResource("SphereMesh_oar8e")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_hu1f0")
 
 [node name="DraftMarker" type="MeshInstance3D" parent="PrecombatPhase"]
-transform = Transform3D(0.13522, 0, 0, 0, 0.13522, 0, 0, 0, 0.13522, 0, 0.0579324, -0.0302044)
+transform = Transform3D(0.13522, 0, 0, 0, 0.13522, 0, 0, 0, 0.13522, 0, 0.0579324, 0.247371)
 mesh = SubResource("SphereMesh_oar8e")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_jlrp2")
 
 [node name="PassPackMarker" type="MeshInstance3D" parent="PrecombatPhase"]
-transform = Transform3D(0.060318, 0, 0, 0, 0.060318, 0, 0, 0, 0.060318, 0, 0.0579324, -0.204466)
+transform = Transform3D(0.060318, 0, 0, 0, 0.060318, 0, 0, 0, 0.060318, 0, 0.0579324, 0.0141907)
 mesh = SubResource("SphereMesh_oar8e")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_haltt")
 
 [node name="ITManaMarker" type="MeshInstance3D" parent="PrecombatPhase"]
-transform = Transform3D(0.13522, 0, 0, 0, 0.13522, 0, 0, 0, 0.13522, -0.227574, 0.0596206, -0.295952)
+transform = Transform3D(0.13522, 0, 0, 0, 0.13522, 0, 0, 0, 0.13522, -0.227574, 0.0596206, -0.20099)
 mesh = SubResource("SphereMesh_oar8e")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_jacsm")
 
+[node name="ITHasteMarker" type="MeshInstance3D" parent="PrecombatPhase"]
+transform = Transform3D(0.13522, 0, 0, 0, 0.13522, 0, 0, 0, 0.13522, -0.227574, 0.0596206, -0.545288)
+mesh = SubResource("SphereMesh_oar8e")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_wub36")
+
 [node name="NITManaMarker" type="MeshInstance3D" parent="PrecombatPhase"]
-transform = Transform3D(0.13522, 0, 0, 0, 0.13522, 0, 0, 0, 0.13522, 0.196491, 0.0596206, -0.427237)
+transform = Transform3D(0.13522, 0, 0, 0, 0.13522, 0, 0, 0, 0.13522, 0.196491, 0.0596206, -0.373103)
 mesh = SubResource("SphereMesh_oar8e")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_viw1y")
 
+[node name="NITHasteMarker" type="MeshInstance3D" parent="PrecombatPhase"]
+transform = Transform3D(0.13522, 0, 0, 0, 0.13522, 0, 0, 0, 0.13522, 0.196491, 0.0596206, -0.704784)
+mesh = SubResource("SphereMesh_oar8e")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_yqyvr")
+
 [node name="CombatPhase" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.198387, 0.0249598, 0.397293)
 mesh = SubResource("BoxMesh_y0vls")
-surface_material_override/0 = SubResource("StandardMaterial3D_14ck3")
+surface_material_override/0 = SubResource("StandardMaterial3D_tf0ga")
 
 [node name="Attack" type="MeshInstance3D" parent="CombatPhase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0065167, 0.0582079, 0.242855)
@@ -201,7 +234,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_jxf3a")
 [node name="CombatPhase2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.203548, 0.0249598, -0.388951)
 mesh = SubResource("BoxMesh_y0vls")
-surface_material_override/0 = SubResource("StandardMaterial3D_14ck3")
+surface_material_override/0 = SubResource("StandardMaterial3D_bwdn0")
 
 [node name="Attack" type="MeshInstance3D" parent="CombatPhase2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0065167, 0.0582079, 0.242855)
@@ -257,7 +290,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_7bwsg")
 [node name="MainPhase" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000330061, 0.0249598, -1.27408)
 mesh = SubResource("BoxMesh_2m68q")
-surface_material_override/0 = SubResource("StandardMaterial3D_14ck3")
+surface_material_override/0 = SubResource("StandardMaterial3D_6cg3r")
 
 [node name="Regroup" type="MeshInstance3D" parent="MainPhase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000507772, 0.0582079, 0.215919)

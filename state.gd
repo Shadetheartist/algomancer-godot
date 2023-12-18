@@ -12,9 +12,11 @@ var mutations_path = '/tmp/mutations.json'
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	EventBus.action.connect(_handle_action)
+	
 	game_data = new_game()
+	history_add(game_data, null, null)
 	valid_actions = get_actions(game_data)
-	history_add(game_data, valid_actions, null)
+	
 	init()
 
 
@@ -26,6 +28,8 @@ func new_game():
 
 func get_actions(game_data):
 	var stderr = []
+	
+	write_to_file_as_json(state_path, game_data)
 	OS.execute(algomancer_cli_path, ['action', 'ls', '-f', state_path, '-o', actions_path], stderr, true)
 	var result = read_json_from_file(actions_path)
 	
@@ -57,25 +61,20 @@ func history_add(game_data, applied_action, mutations):
 func mutations_list_render():
 	var step = history[current_step]
 	if step.mutations != null:
-		step.mutations.reverse()
 		for mutation in step.mutations:
 			$CanvasLayer/MutationsList.add_item(mutation.type + ': ' + JSON.stringify(mutation))
 			pass
-		step.mutations.reverse()
 		
 func history_list_render():
 	$CanvasLayer/HistoryList.clear()
 	$CanvasLayer/MutationsList.clear()
 	
-	history.reverse()
 	
 	for step in history:
 		if step.action == null: 
 			$CanvasLayer/HistoryList.add_item("Initial State")
 		else:
 			$CanvasLayer/HistoryList.add_item(JSON.stringify(step.action))
-
-	history.reverse()
 
 var game_data = {}
 var valid_actions = {}
@@ -177,9 +176,8 @@ func _handle_action(action):
 func _on_history_list_item_clicked(index, at_position, mouse_button_index):
 	if mouse_button_index != MOUSE_BUTTON_LEFT:
 		return
-	
-	current_step = history.size() - (index + 1)
-	game_data = history[current_step].state
+
+	game_data = history[index].state
 	valid_actions = get_actions(game_data)
 	
 	reset()
